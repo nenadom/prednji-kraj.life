@@ -1,0 +1,12 @@
+.RunPage {
+  overflow: hidden;
+}
+
+.RunPage .screen-container {
+  text-align: center;
+}
+
+body,
+.RunPage {
+  font-family: Menlo, monospace;
+}
