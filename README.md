@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JSNES Web UI
 
-## Getting Started
+A React-based web UI for [JSNES](https://github.com/bfirsh/jsnes).
 
-First, run the development server:
+## Running in development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+    $ yarn install
+    $ yarn start
+
+## Building for production
+
+    $ yarn build
+
+The built app will be in `build/`.
+
+## Running tests
+
+    $ yarn test
+
+## Formatting code
+
+All code must conform to [Prettier](https://prettier.io/) formatting. The test suite won't pass unless it does.
+
+To automatically format all your code, run:
+
+    $ yarn run format
+
+## Embedding JSNES in your own app
+
+Unfortunately this isn't trivial at the moment. The best way is copy and paste code from this repository into a React app, then use the [`<Emulator>`](https://github.com/bfirsh/jsnes-web/blob/master/src/Emulator.js). [Here is a usage example.](https://github.com/bfirsh/jsnes-web/blob/d3c35eec11986412626cbd08668dbac700e08751/src/RunPage.js#L119-L125).
+
+A project for potential contributors (hello!): jsnes-web should be reusable and on NPM! It just needs compiling and bundling.
+
+## Adding roms
+
+Open `src/config.js` and add a new key to `config.ROMS`. For example:
+
+```javascript
+const config = {
+  ROMS: {
+    // ...
+    myrom: {
+      name: "My Rom",
+      description: <span>This is my own homebrew NES rom</span>,
+      url: "http://localhost:3000/roms/myrom/myrom.nes"
+    }
+  }
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Then, add the ROM file as `public/roms/myrom/myrom.nes`. The ROM should now be available to play at http://localhost:3000/run/myrom
